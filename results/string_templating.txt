@@ -1,0 +1,67 @@
+Compiling 1 file (.ex)
+"ALL THE FOLLOWING SHOULD BE TRUE"
+true
+true
+true
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+Number of Available Cores: 4
+Available memory: 7.78 GB
+Elixir 1.10.2
+Erlang 22.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 1
+inputs: none specified
+Estimated total run time: 28 s
+
+Benchmarking base...
+Benchmarking eex...
+Benchmarking eex_eval_string...
+Benchmarking manual...
+
+Name                      ips        average  deviation         median         99th %
+manual                  72.44       13.80 ms    ±13.86%       13.37 ms       25.06 ms
+base                     9.39      106.52 ms     ±5.54%      103.63 ms      124.60 ms
+eex                      1.95      513.22 ms     ±3.91%      507.41 ms      542.22 ms
+eex_eval_string          1.47      678.46 ms     ±3.07%      672.26 ms      718.10 ms
+
+Comparison: 
+manual                  72.44
+base                     9.39 - 7.72x slower +92.72 ms
+eex                      1.95 - 37.18x slower +499.41 ms
+eex_eval_string          1.47 - 49.15x slower +664.65 ms
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+Number of Available Cores: 4
+Available memory: 7.78 GB
+Elixir 1.10.2
+Erlang 22.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 1
+inputs: none specified
+Estimated total run time: 28 s
+
+Benchmarking base...
+Benchmarking eex...
+Benchmarking eex_eval_string...
+Benchmarking manual...
+
+Name                      ips        average  deviation         median         99th %
+manual                   3.51         0.28 s     ±9.96%         0.27 s         0.36 s
+base                     0.24         4.21 s    ±10.40%         4.21 s         4.52 s
+eex                    0.0204        49.05 s     ±0.00%        49.05 s        49.05 s
+eex_eval_string        0.0134        74.51 s     ±0.00%        74.51 s        74.51 s
+
+Comparison: 
+manual                   3.51
+base                     0.24 - 14.80x slower +3.93 s
+eex                    0.0204 - 172.29x slower +48.77 s
+eex_eval_string        0.0134 - 261.71x slower +74.22 s
