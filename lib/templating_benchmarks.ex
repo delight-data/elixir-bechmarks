@@ -17,6 +17,24 @@ defmodule TemplatingBenchmarks do
     end)
   end
 
+  def eex_compiled_templating_create(template, variable_names) do
+    module_body =
+      quote bind_quoted: [template: template, variable_names: variable_names] do
+      require EEx
+      EEx.function_from_string(:def, :example, template, variable_names)
+    end
+
+    Module.create(EexExampleModule, module_body, Macro.Env.location(__ENV__))
+  end
+
+  def eex_compiled_templating_run(bindings) do
+    Enum.map(bindings, fn binding ->
+      # {result, _} = Code.eval_quoted(compiled, binding)
+      # result
+      apply(EexExampleModule, :example, Keyword.values(binding))
+    end)
+  end
+
   def eex_eval_string_templating(template, bindings) do
     Enum.map(bindings, fn binding ->
       EEx.eval_string(template, binding)
