@@ -1,0 +1,70 @@
+"Running benchmark for a small template with 1 variable."
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+Number of Available Cores: 4
+Available memory: 7.78 GB
+Elixir 1.10.2
+Erlang 22.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 1
+inputs: none specified
+Estimated total run time: 35 s
+
+Benchmarking base...
+Benchmarking eex...
+Benchmarking eex_compiled...
+Benchmarking eex_eval_string...
+Benchmarking manual...
+
+Name                      ips        average  deviation         median         99th %
+manual                  84.95       11.77 ms    ±33.44%       10.47 ms       19.10 ms
+eex_compiled            61.75       16.20 ms     ±7.57%       15.94 ms       24.98 ms
+base                    11.88       84.17 ms     ±4.13%       82.74 ms       96.20 ms
+eex                      1.88      531.46 ms     ±3.53%      528.96 ms      567.28 ms
+eex_eval_string          1.38      722.13 ms     ±4.75%      715.53 ms      768.71 ms
+
+Comparison: 
+manual                  84.95
+eex_compiled            61.75 - 1.38x slower +4.42 ms
+base                    11.88 - 7.15x slower +72.40 ms
+eex                      1.88 - 45.15x slower +519.69 ms
+eex_eval_string          1.38 - 61.34x slower +710.36 ms
+"Running benchmark for a large template with 4 variables."
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+Number of Available Cores: 4
+Available memory: 7.78 GB
+Elixir 1.10.2
+Erlang 22.3
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 1
+inputs: none specified
+Estimated total run time: 35 s
+
+Benchmarking base...
+Benchmarking eex...
+Benchmarking eex_compiled...
+Benchmarking eex_eval_string...
+Benchmarking manual...
+
+Name                      ips        average  deviation         median         99th %
+manual                   7.09        0.141 s     ±5.78%        0.140 s        0.166 s
+eex_compiled             5.14        0.195 s     ±6.66%        0.192 s         0.22 s
+base                     0.27         3.69 s     ±9.05%         3.69 s         3.92 s
+eex                    0.0292        34.25 s     ±0.00%        34.25 s        34.25 s
+eex_eval_string        0.0107        93.61 s     ±0.00%        93.61 s        93.61 s
+
+Comparison: 
+manual                   7.09
+eex_compiled             5.14 - 1.38x slower +0.0535 s
+base                     0.27 - 26.13x slower +3.55 s
+eex                    0.0292 - 242.66x slower +34.11 s
+eex_eval_string        0.0107 - 663.29x slower +93.47 s
