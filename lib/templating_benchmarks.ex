@@ -8,26 +8,16 @@ defmodule TemplatingBenchmarks do
     end)
   end
 
-  # def eex_templating(template, bindings) do
-  #   variable_names = bindings |> hd |> Keyword.keys
-  #   IO.inspect(variable_names, label: :variable_names)
-  #   # compiled = EEx.compile_string(template)
-  #   module_body =
-  #     quote bind_quoted: [template: template, variable_names: variable_names] do
-  #       require EEx
-  #       EEx.function_from_string(:def, :example, template, variable_names)
-  #     end
+  def eex_templating(template, bindings) do
+    compiled = EEx.compile_string(template)
 
-  #   Module.create(EexExampleModule, module_body, Macro.Env.location(__ENV__))
+    Enum.map(bindings, fn binding ->
+      {result, _} = Code.eval_quoted(compiled, binding)
+      result
+    end)
+  end
 
-  #   Enum.map(bindings, fn binding ->
-  #     # {result, _} = Code.eval_quoted(compiled, binding)
-  #     # result
-  #     EexExampleModule.example(Keyword.values(binding))
-  #   end)
-  # end
-
-  def eex_templating_create(template, variable_names) do
+  def eex_compiled_templating_create(template, variable_names) do
     module_body =
       quote bind_quoted: [template: template, variable_names: variable_names] do
       require EEx
@@ -37,7 +27,7 @@ defmodule TemplatingBenchmarks do
     Module.create(EexExampleModule, module_body, Macro.Env.location(__ENV__))
   end
 
-  def eex_templating_run(bindings) do
+  def eex_compiled_templating_run(bindings) do
     Enum.map(bindings, fn binding ->
       # {result, _} = Code.eval_quoted(compiled, binding)
       # result
