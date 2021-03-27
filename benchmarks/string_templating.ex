@@ -5,8 +5,10 @@ nb_bindings = 10_000
 bindings = TemplatingBenchmarks.create_bindings(nb_bindings, variables)
 
 
+TemplatingBenchmarks.eex_templating_create(simple_template, bindings |> hd |> Keyword.keys)
+
 result1 = TemplatingBenchmarks.base_templating(simple_template, bindings)
-result2 = TemplatingBenchmarks.eex_templating(simple_template, bindings)
+result2 = TemplatingBenchmarks.eex_templating_run(bindings)
 result3 = TemplatingBenchmarks.manual_templating(simple_template, bindings)
 result4 = TemplatingBenchmarks.eex_eval_string_templating(simple_template, bindings)
 
@@ -15,9 +17,11 @@ IO.inspect(result1 == result2)
 IO.inspect(result1 == result3)
 IO.inspect(result1 == result4)
 
+
 Benchee.run(%{
   "base" => fn -> TemplatingBenchmarks.base_templating(simple_template, bindings) end,
-  "eex" => fn -> TemplatingBenchmarks.eex_templating(simple_template, bindings) end,
+  # "eex" => fn -> TemplatingBenchmarks.eex_templating(simple_template, bindings) end,
+  "eex" => fn -> TemplatingBenchmarks.eex_templating_run(bindings) end,
   "eex_eval_string" => fn -> TemplatingBenchmarks.eex_eval_string_templating(simple_template, bindings) end,
   "manual" => fn -> TemplatingBenchmarks.manual_templating(simple_template, bindings) end
 })
@@ -182,10 +186,12 @@ variables = [:var1, :var2, :var3, :var4]
 nb_bindings = 10_000
 
 bindings = TemplatingBenchmarks.create_bindings(nb_bindings, variables)
+TemplatingBenchmarks.eex_templating_create(complex_template, bindings |> hd |> Keyword.keys)
 
 Benchee.run(%{
   "base" => fn -> TemplatingBenchmarks.base_templating(complex_template, bindings) end,
-  "eex" => fn -> TemplatingBenchmarks.eex_templating(complex_template, bindings) end,
+  # "eex" => fn -> TemplatingBenchmarks.eex_templating(complex_template, bindings) end,
+  "eex" => fn -> TemplatingBenchmarks.eex_templating_run(bindings) end,
   "eex_eval_string" => fn -> TemplatingBenchmarks.eex_eval_string_templating(complex_template, bindings) end,
   "manual" => fn -> TemplatingBenchmarks.manual_templating(complex_template, bindings) end
 })
